@@ -22,28 +22,33 @@ Aplicação frontend para gerenciamento de tarefas desenvolvida com Next.js 15, 
 ## 🔧 Instalação
 
 1. Clone o repositório:
+
 ```bash
 git clone https://github.com/guilhermewall/my-tasks-front.git
 cd my-tasks-front
 ```
 
 2. Instale as dependências:
+
 ```bash
 npm install
 ```
 
 3. Configure as variáveis de ambiente:
+
 ```bash
 cp .env.example .env.local
 ```
 
 Edite `.env.local` com suas configurações:
+
 ```env
 MY_TASKS_API_URL=https://my-tasks-api-qam1.onrender.com
 COOKIE_DOMAIN=localhost
 ```
 
 4. Execute o servidor de desenvolvimento:
+
 ```bash
 npm run dev
 ```
@@ -109,6 +114,7 @@ Acesse [http://localhost:3000](http://localhost:3000)
 ## 🔐 Arquitetura
 
 ### BFF (Backend for Frontend)
+
 A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), criando uma camada intermediária entre o frontend e a API backend:
 
 - **Route Handlers** (`app/api/*`) - Proxy para a API backend
@@ -118,20 +124,24 @@ A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), cr
 ### Camadas da Aplicação
 
 1. **UI Layer** (`components/`, `app/`)
+
    - Componentes React com shadcn/ui
    - Páginas com App Router
    - Formulários com react-hook-form
 
 2. **State Management** (`hooks/`)
+
    - React Query para cache e sincronização
    - Custom hooks para auth e tasks
    - Invalidação automática de cache
 
 3. **Service Layer** (`services/`)
+
    - Abstração de chamadas à API local
    - Client-side services
 
 4. **BFF Layer** (`app/api/`)
+
    - Route Handlers como proxy
    - Gerenciamento de cookies
    - Validação de requests
@@ -144,6 +154,7 @@ A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), cr
 ## 🎯 Funcionalidades
 
 ### Autenticação
+
 - ✅ Login com email e senha
 - ✅ Registro de nova conta
 - ✅ Logout com limpeza de sessão
@@ -151,6 +162,7 @@ A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), cr
 - ✅ Middleware de proteção de rotas
 
 ### Gerenciamento de Tarefas
+
 - ✅ Listar tarefas com filtros
 - ✅ Criar nova tarefa
 - ✅ Editar tarefa existente
@@ -164,6 +176,7 @@ A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), cr
 - ✅ Paginação com cursor
 
 ### UI/UX
+
 - ✅ Design responsivo
 - ✅ Dark mode ready (sistema)
 - ✅ Loading states
@@ -179,6 +192,7 @@ A aplicação utiliza Next.js Route Handlers como BFF (Backend for Frontend), cr
 A aplicação consome a API: `https://my-tasks-api-qam1.onrender.com`
 
 Endpoints disponíveis:
+
 - `POST /auth/register` - Registro
 - `POST /auth/login` - Login
 - `POST /auth/refresh` - Refresh token
@@ -202,6 +216,7 @@ Endpoints disponíveis:
 ## 📱 Responsividade
 
 A aplicação é totalmente responsiva com breakpoints:
+
 - Mobile: < 768px
 - Tablet: 768px - 1024px
 - Desktop: > 1024px
@@ -209,6 +224,7 @@ A aplicação é totalmente responsiva com breakpoints:
 ## 🎨 Tema
 
 Utiliza o sistema de temas do shadcn/ui com variáveis CSS:
+
 - Suporta dark mode (baseado no sistema)
 - Customizável via `globals.css`
 - Paleta de cores consistente
@@ -216,12 +232,13 @@ Utiliza o sistema de temas do shadcn/ui com variáveis CSS:
 ## 🐛 Debugging
 
 Para debug, ative as ferramentas do React Query:
+
 ```tsx
 // app/providers.tsx
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Adicione no componente Providers:
-<ReactQueryDevtools initialIsOpen={false} />
+<ReactQueryDevtools initialIsOpen={false} />;
 ```
 
 ## 📄 Licença

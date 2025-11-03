@@ -115,27 +115,27 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
     new Date(task.dueDate) < new Date();
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
-      <CardHeader className="pb-3">
+    <Card className="hover:shadow-lg hover:border-primary/30 transition-all duration-200">
+      <CardHeader className="pb-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 flex-1">
             <Button
               variant="ghost"
               size="icon"
-              className="h-6 w-6 p-0 mt-0.5"
+              className="h-6 w-6 p-0 mt-1"
               onClick={handleToggleStatus}
               disabled={isUpdatingStatus}
             >
               {task.status === "done" ? (
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <CheckCircle2 className="h-6 w-6 text-green-600" />
               ) : (
-                <Circle className="h-5 w-5 text-muted-foreground" />
+                <Circle className="h-6 w-6 text-muted-foreground hover:text-primary" />
               )}
             </Button>
 
             <div className="flex-1 min-w-0">
               <h3
-                className={`font-semibold text-base mb-1 ${
+                className={`font-semibold text-lg mb-2 ${
                   task.status === "done"
                     ? "line-through text-muted-foreground"
                     : ""
@@ -144,7 +144,7 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
                 {task.title}
               </h3>
               {task.description && (
-                <p className="text-sm text-muted-foreground line-clamp-2">
+                <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                   {task.description}
                 </p>
               )}
@@ -175,7 +175,7 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="pb-3">
+      <CardContent className="pb-4">
         <div className="flex flex-wrap gap-2">
           <TaskStatusBadge status={task.status} />
           <TaskPriorityBadge priority={task.priority} />
@@ -183,13 +183,13 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
       </CardContent>
 
       {dueDateText && (
-        <CardFooter className="pt-0">
+        <CardFooter className="pt-0 pb-4">
           <div
-            className={`flex items-center gap-1.5 text-xs ${
-              isOverdue ? "text-red-600" : "text-muted-foreground"
+            className={`flex items-center gap-2 text-sm ${
+              isOverdue ? "text-red-600 font-medium" : "text-muted-foreground"
             }`}
           >
-            <Calendar className="h-3.5 w-3.5" />
+            <Calendar className="h-4 w-4" />
             <span>{dueDateText}</span>
           </div>
         </CardFooter>

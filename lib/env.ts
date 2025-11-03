@@ -5,7 +5,10 @@ const envSchema = z.object({
   NEXT_PUBLIC_APP_NAME: z.string().default("MyTasks"),
 
   // Server-only (só no servidor)
-  MY_TASKS_API_URL: z.string().url(),
+  MY_TASKS_API_URL: z
+    .string()
+    .url()
+    .default("https://my-tasks-api-qam1.onrender.com"),
   COOKIE_DOMAIN: z.string().default("localhost"),
   NODE_ENV: z
     .enum(["development", "production", "test"])
@@ -21,11 +24,21 @@ const parsedEnv = envSchema.safeParse({
 });
 
 if (!parsedEnv.success) {
-  console.error("❌ Invalid environment variables:", parsedEnv.error.format());
-  throw new Error("Invalid environment variables");
+  console.error(
+    "⚠️ Invalid environment variables:",
+    JSON.stringify(parsedEnv.error.format(), null, 2)
+  );
+  console.error("Using default values for missing variables");
 }
 
-export const env = parsedEnv.data;
+export const env = parsedEnv.success
+  ? parsedEnv.data
+  : envSchema.parse({
+      NEXT_PUBLIC_APP_NAME: "MyTasks",
+      MY_TASKS_API_URL: "https://my-tasks-api-qam1.onrender.com",
+      COOKIE_DOMAIN: "localhost",
+      NODE_ENV: "development",
+    });
 
 // Helper para verificar se estamos no servidor
 export const isServer = globalThis.window === undefined;

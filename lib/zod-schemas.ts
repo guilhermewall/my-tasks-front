@@ -50,9 +50,9 @@ export type TaskListResponse = z.infer<typeof TaskListResponseSchema>;
 
 export const CreateTaskInputSchema = z.object({
   title: z.string().min(1, "Título é obrigatório").max(200),
-  description: z.string().optional(),
+  description: z.string().optional().nullable(),
   priority: TaskPriority.optional(),
-  dueDate: z.string().optional(),
+  dueDate: z.string().optional().nullable(),
 });
 
 export type CreateTaskInput = z.infer<typeof CreateTaskInputSchema>;
@@ -99,7 +99,13 @@ export type LoginInput = z.infer<typeof LoginInputSchema>;
 export const RegisterInputSchema = z.object({
   name: z.string().min(2, "Nome deve ter no mínimo 2 caracteres"),
   email: z.string().email("Email inválido"),
-  password: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
+  password: z
+    .string()
+    .min(8, "Senha deve ter no mínimo 8 caracteres")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
+      "Senha deve conter pelo menos: 1 letra minúscula, 1 letra maiúscula, 1 número e 1 caractere especial (!@#$%^&*)"
+    ),
 });
 
 export type RegisterInput = z.infer<typeof RegisterInputSchema>;

@@ -12,6 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -102,6 +103,10 @@ export function RegisterForm() {
                   {...field}
                 />
               </FormControl>
+              <FormDescription>
+                Mínimo 8 caracteres com letra minúscula, maiúscula, número e
+                caractere especial (!@#$%^&*)
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

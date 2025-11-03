@@ -9,13 +9,7 @@ import { TaskStatusBadge } from "@/components/tasks/TaskStatusBadge";
 import { TaskPriorityBadge } from "@/components/tasks/TaskPriorityBadge";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import {
-  ArrowLeft,
-  Calendar,
-  Loader2,
-  Trash2,
-  Edit,
-} from "lucide-react";
+import { ArrowLeft, Calendar, Loader2, Trash2, Edit } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -160,10 +154,7 @@ export default function TaskDetailPage({ params }: PageProps) {
               }}
             />
             <div className="mt-4">
-              <Button
-                variant="ghost"
-                onClick={() => setIsEditing(false)}
-              >
+              <Button variant="ghost" onClick={() => setIsEditing(false)}>
                 Cancelar
               </Button>
             </div>

@@ -13,12 +13,15 @@ export default function DashboardLayout({
   const { logout, isLoggingOut } = useAuth();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <Link href="/tasks" className="flex items-center gap-2 font-semibold text-xl">
+            <Link
+              href="/tasks"
+              className="flex items-center gap-2 font-semibold text-xl hover:opacity-80 transition-opacity"
+            >
               <CheckSquare className="h-6 w-6 text-primary" />
               <span>MyTasks</span>
             </Link>
@@ -56,11 +59,11 @@ export default function DashboardLayout({
       </header>
 
       {/* Main Content */}
-      <main className="container py-8">{children}</main>
+      <main className="flex-1">{children}</main>
 
       {/* Footer */}
-      <footer className="border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-16 md:flex-row">
+      <footer className="border-t mt-auto">
+        <div className="container max-w-7xl mx-auto px-4 py-6">
           <p className="text-center text-sm text-muted-foreground">
             © 2025 MyTasks. Todos os direitos reservados.
           </p>

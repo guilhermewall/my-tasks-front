@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { getAccessToken } from "@/lib/auth-cookies";
+import { fetcher } from "@/lib/fetcher";
+import { AuthUserSchema } from "@/lib/zod-schemas";
 
 /**
  * GET /api/auth/me
  * Retorna informações do usuário autenticado
- * Nota: Este endpoint poderia buscar do backend, mas por simplicidade
- * vamos decodificar do JWT ou implementar quando necessário
  */
 export async function GET() {
   try {
@@ -18,13 +18,29 @@ export async function GET() {
       );
     }
 
-    // Implementação futura: Decodificar JWT ou buscar do backend
-    // Por enquanto, retorna sucesso se o token existe
-    return NextResponse.json({
-      authenticated: true,
+    // Busca dados do usuário no backend
+    const response = await fetcher<unknown>("/auth/me", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
+
+    // Valida a resposta
+    const validatedUser = AuthUserSchema.parse(response);
+
+    return NextResponse.json({ user: validatedUser });
   } catch (error) {
     console.error("Me error:", error);
+
+    if (error instanceof Error && "statusCode" in error) {
+      return NextResponse.json(
+        {
+          error: "Error",
+          message: error.message,
+        },
+        { status: (error as { statusCode: number }).statusCode }
+      );
+    }
 
     return NextResponse.json(
       { error: "Error", message: "Erro ao buscar usuário" },

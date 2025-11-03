@@ -55,16 +55,19 @@ export function TaskForm({ task, onSuccess }: TaskFormProps) {
   const isSubmitting = createTask.isPending || updateTask.isPending;
 
   const onSubmit = (data: CreateTaskInput) => {
+    // Limpa valores vazios
+    const cleanData = {
+      title: data.title,
+      description: data.description || undefined,
+      priority: data.priority || "medium",
+      dueDate: data.dueDate || undefined,
+    };
+
     if (isEditing) {
       updateTask.mutate(
         {
           id: task.id,
-          data: {
-            title: data.title,
-            description: data.description,
-            priority: data.priority,
-            dueDate: data.dueDate,
-          },
+          data: cleanData,
         },
         {
           onSuccess: () => {
@@ -84,7 +87,7 @@ export function TaskForm({ task, onSuccess }: TaskFormProps) {
         }
       );
     } else {
-      createTask.mutate(data, {
+      createTask.mutate(cleanData, {
         onSuccess: () => {
           toast({
             title: "Tarefa criada!",

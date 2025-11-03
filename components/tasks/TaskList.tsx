@@ -53,16 +53,16 @@ export function TaskList() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="container max-w-7xl mx-auto py-8 px-4 space-y-8 min-h-[calc(100vh-8rem)]">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Minhas Tarefas</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tight">Minhas Tarefas</h2>
+          <p className="text-muted-foreground mt-1">
             Gerencie suas tarefas e acompanhe seu progresso
           </p>
         </div>
-        <Button onClick={() => setIsCreateDialogOpen(true)} className="gap-2">
-          <Plus className="h-4 w-4" />
+        <Button onClick={() => setIsCreateDialogOpen(true)} size="lg" className="gap-2">
+          <Plus className="h-5 w-5" />
           Nova tarefa
         </Button>
       </div>
@@ -70,14 +70,14 @@ export function TaskList() {
       <TaskFilters filters={filters} onFiltersChange={setFilters} />
 
       {isLoading && (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex items-center justify-center py-16">
           <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
         </div>
       )}
 
       {!isLoading && data?.data.length === 0 && (
-        <div className="text-center py-12 border-2 border-dashed rounded-lg">
-          <p className="text-muted-foreground mb-4">
+        <div className="text-center py-16 border-2 border-dashed rounded-lg bg-muted/10">
+          <p className="text-muted-foreground mb-4 text-lg">
             {filters.search || filters.status
               ? "Nenhuma tarefa encontrada com os filtros aplicados"
               : "Você ainda não tem tarefas"}
@@ -86,6 +86,7 @@ export function TaskList() {
             <Button
               onClick={() => setIsCreateDialogOpen(true)}
               variant="outline"
+              size="lg"
             >
               <Plus className="h-4 w-4 mr-2" />
               Criar primeira tarefa
@@ -96,8 +97,7 @@ export function TaskList() {
 
       {!isLoading && data && data.data.length > 0 && (
         <>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {data.data.map((task) => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{data.data.map((task) => (
               <TaskCard key={task.id} task={task} onEdit={handleEdit} />
             ))}
           </div>
