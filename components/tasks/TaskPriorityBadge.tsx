@@ -6,7 +6,10 @@ interface TaskPriorityBadgeProps {
   className?: string;
 }
 
-export function TaskPriorityBadge({ priority, className }: TaskPriorityBadgeProps) {
+export function TaskPriorityBadge({
+  priority,
+  className,
+}: TaskPriorityBadgeProps) {
   const priorityConfig = {
     low: {
       label: "Baixa",
@@ -28,10 +31,7 @@ export function TaskPriorityBadge({ priority, className }: TaskPriorityBadgeProp
   const config = priorityConfig[priority];
 
   return (
-    <Badge
-      variant={config.variant}
-      className={cn(config.className, className)}
-    >
+    <Badge variant={config.variant} className={cn(config.className, className)}>
       {config.label}
     </Badge>
   );

@@ -47,7 +47,7 @@ export function useAuth() {
   const logoutMutation = useMutation({
     mutationFn: () => authService.logout(),
     onSuccess: () => {
-      // Limpa todo o cache do React Query
+      // Limpa todo cache do React Query
       queryClient.clear();
       // Redireciona para login
       router.push("/login");

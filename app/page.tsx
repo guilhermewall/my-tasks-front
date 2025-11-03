@@ -1,12 +1,20 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
+
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redireciona para a página de login
+    router.push("/login");
+  }, [router]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">MyTasks</h1>
-        <p className="text-muted-foreground">
-          Gerenciador de tarefas multiusuário
-        </p>
-      </div>
-    </main>
+    <div className="flex min-h-screen items-center justify-center">
+      <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+    </div>
   );
 }

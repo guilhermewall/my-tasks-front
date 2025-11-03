@@ -83,7 +83,10 @@ export function TaskList() {
               : "Você ainda não tem tarefas"}
           </p>
           {!filters.search && !filters.status && (
-            <Button onClick={() => setIsCreateDialogOpen(true)} variant="outline">
+            <Button
+              onClick={() => setIsCreateDialogOpen(true)}
+              variant="outline"
+            >
               <Plus className="h-4 w-4 mr-2" />
               Criar primeira tarefa
             </Button>

@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TaskStatusBadge } from "./TaskStatusBadge";
 import { TaskPriorityBadge } from "./TaskPriorityBadge";
@@ -50,7 +55,9 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
         onSuccess: () => {
           toast({
             title: "Status atualizado!",
-            description: `Tarefa marcada como ${newStatus === "done" ? "concluída" : "pendente"}.`,
+            description: `Tarefa marcada como ${
+              newStatus === "done" ? "concluída" : "pendente"
+            }.`,
           });
         },
         onError: (error: Error) => {
@@ -129,7 +136,9 @@ export function TaskCard({ task, onEdit }: TaskCardProps) {
             <div className="flex-1 min-w-0">
               <h3
                 className={`font-semibold text-base mb-1 ${
-                  task.status === "done" ? "line-through text-muted-foreground" : ""
+                  task.status === "done"
+                    ? "line-through text-muted-foreground"
+                    : ""
                 }`}
               >
                 {task.title}

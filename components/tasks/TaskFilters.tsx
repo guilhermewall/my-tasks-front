@@ -23,7 +23,11 @@ export function TaskFilters({ filters, onFiltersChange }: TaskFiltersProps) {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onFiltersChange({ ...filters, search: searchInput || undefined, cursor: undefined });
+    onFiltersChange({
+      ...filters,
+      search: searchInput || undefined,
+      cursor: undefined,
+    });
   };
 
   const handleStatusChange = (value: string) => {
@@ -32,22 +36,23 @@ export function TaskFilters({ filters, onFiltersChange }: TaskFiltersProps) {
   };
 
   const handleSortOrderChange = (value: string) => {
-    onFiltersChange({ 
-      ...filters, 
+    onFiltersChange({
+      ...filters,
       sortOrder: value as "asc" | "desc",
-      cursor: undefined 
+      cursor: undefined,
     });
   };
 
   const handleClearFilters = () => {
     setSearchInput("");
-    onFiltersChange({ 
+    onFiltersChange({
       limit: filters.limit,
       sortOrder: "desc",
     });
   };
 
-  const hasActiveFilters = filters.search || filters.status || filters.sortOrder === "asc";
+  const hasActiveFilters =
+    filters.search || filters.status || filters.sortOrder === "asc";
 
   return (
     <div className="space-y-4">

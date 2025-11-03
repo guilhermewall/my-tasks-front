@@ -46,7 +46,9 @@ export function TaskForm({ task, onSuccess }: TaskFormProps) {
       title: task?.title || "",
       description: task?.description || "",
       priority: task?.priority || "medium",
-      dueDate: task?.dueDate ? new Date(task.dueDate).toISOString().split("T")[0] : undefined,
+      dueDate: task?.dueDate
+        ? new Date(task.dueDate).toISOString().split("T")[0]
+        : undefined,
     },
   });
 

@@ -40,7 +40,8 @@ export function LoginForm() {
         toast({
           variant: "destructive",
           title: "Erro ao fazer login",
-          description: error.message || "Verifique suas credenciais e tente novamente.",
+          description:
+            error.message || "Verifique suas credenciais e tente novamente.",
         });
       },
     });
@@ -88,9 +89,7 @@ export function LoginForm() {
         />
 
         {loginError && (
-          <div className="text-sm text-destructive">
-            {loginError.message}
-          </div>
+          <div className="text-sm text-destructive">{loginError.message}</div>
         )}
 
         <Button type="submit" className="w-full" disabled={isLoggingIn}>
