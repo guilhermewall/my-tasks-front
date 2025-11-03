@@ -1,24 +1,27 @@
 import { z } from "zod";
 
 // ============================================================
-// TASK SCHEMAS
+// TASK SCHEMAS (baseado na API real do backend)
 // ============================================================
 
 export const TaskStatus = z
-  .enum(["pending", "in_progress", "completed", "cancelled"])
+  .enum(["pending", "done"]) // Backend usa apenas pending e done
   .default("pending");
 
-export const TaskPriority = z.enum(["low", "medium", "high"]).default("medium");
+export const TaskPriority = z
+  .enum(["low", "medium", "high"])
+  .default("medium");
 
 export const TaskSchema = z.object({
   id: z.string().uuid(),
+  userId: z.string().uuid(),
   title: z.string().min(1, "Título é obrigatório").max(200),
   description: z.string().nullable().optional(),
   status: TaskStatus,
   priority: TaskPriority,
   dueDate: z.string().nullable().optional(),
   createdAt: z.string(),
-  updatedAt: z.string().nullable().optional(),
+  updatedAt: z.string(),
 });
 
 export type Task = z.infer<typeof TaskSchema>;
@@ -63,17 +66,15 @@ export const UpdateTaskStatusInputSchema = z.object({
 export type UpdateTaskStatusInput = z.infer<typeof UpdateTaskStatusInputSchema>;
 
 // ============================================================
-// TASK FILTERS SCHEMA
+// TASK FILTERS SCHEMA (baseado nos query params da API real)
 // ============================================================
 
 export const TaskFiltersSchema = z.object({
   search: z.string().optional(),
   status: TaskStatus.optional(),
-  priority: TaskPriority.optional(),
-  sortBy: z.enum(["createdAt", "dueDate", "priority"]).optional(),
-  order: z.enum(["asc", "desc"]).optional(),
-  limit: z.coerce.number().min(1).max(100).optional(),
+  limit: z.coerce.number().min(1).max(100).optional().default(10),
   cursor: z.string().optional(),
+  sortOrder: z.enum(["asc", "desc"]).optional().default("desc"),
 });
 
 export type TaskFilters = z.infer<typeof TaskFiltersSchema>;

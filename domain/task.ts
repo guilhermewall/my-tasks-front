@@ -1,28 +1,27 @@
 // Domain types para Task (interfaces puras, SOLID-friendly)
 
-export type TaskStatus = "pending" | "in_progress" | "completed" | "cancelled";
+export type TaskStatus = "pending" | "done"; // Backend usa apenas pending e done
 
 export type TaskPriority = "low" | "medium" | "high";
 
 export interface Task {
   id: string;
+  userId: string;
   title: string;
   description?: string | null;
   status: TaskStatus;
   priority: TaskPriority;
   dueDate?: string | null;
   createdAt: string;
-  updatedAt?: string | null;
+  updatedAt: string;
 }
 
 export interface TaskListParams {
   search?: string;
   status?: TaskStatus;
-  priority?: TaskPriority;
-  sortBy?: "createdAt" | "dueDate" | "priority";
-  order?: "asc" | "desc";
   limit?: number;
   cursor?: string;
+  sortOrder?: "asc" | "desc";
 }
 
 export interface PageInfo {
