@@ -17,7 +17,8 @@ const COOKIE_OPTIONS = {
   secure: env.NODE_ENV === "production",
   sameSite: "lax" as const,
   path: "/",
-  domain: env.COOKIE_DOMAIN === "localhost" ? undefined : env.COOKIE_DOMAIN,
+  // Não define domain para que funcione tanto em localhost quanto em subdomínios da Vercel
+  // O cookie será válido apenas para o domínio atual
 };
 
 /**
