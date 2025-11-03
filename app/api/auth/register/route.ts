@@ -34,10 +34,7 @@ export async function POST(request: NextRequest) {
     );
 
     // Retorna apenas os dados do usuário (sem os tokens)
-    return NextResponse.json(
-      { user: validatedResponse.user },
-      { status: 201 }
-    );
+    return NextResponse.json({ user: validatedResponse.user }, { status: 201 });
   } catch (error) {
     console.error("Register error:", error);
 

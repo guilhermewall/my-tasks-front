@@ -11,7 +11,8 @@ export function middleware(request: NextRequest) {
 
   // Verifica se a rota precisa de autenticação
   const isProtectedRoute = pathname.startsWith("/tasks");
-  const isAuthRoute = pathname.startsWith("/login") || pathname.startsWith("/register");
+  const isAuthRoute =
+    pathname.startsWith("/login") || pathname.startsWith("/register");
 
   // Obtém os tokens dos cookies
   const accessToken = request.cookies.get(COOKIE_NAMES.ACCESS_TOKEN)?.value;

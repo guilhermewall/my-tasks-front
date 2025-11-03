@@ -79,13 +79,8 @@ export function useUpdateTaskStatus() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({
-      id,
-      data,
-    }: {
-      id: string;
-      data: UpdateTaskStatusInput;
-    }) => tasksService.updateStatus(id, data),
+    mutationFn: ({ id, data }: { id: string; data: UpdateTaskStatusInput }) =>
+      tasksService.updateStatus(id, data),
     onSuccess: (_, variables) => {
       // Invalida cache da tarefa específica e da listagem
       queryClient.invalidateQueries({

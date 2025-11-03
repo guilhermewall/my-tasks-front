@@ -8,9 +8,7 @@ export const TaskStatus = z
   .enum(["pending", "done"]) // Backend usa apenas pending e done
   .default("pending");
 
-export const TaskPriority = z
-  .enum(["low", "medium", "high"])
-  .default("medium");
+export const TaskPriority = z.enum(["low", "medium", "high"]).default("medium");
 
 export const TaskSchema = z.object({
   id: z.string().uuid(),
